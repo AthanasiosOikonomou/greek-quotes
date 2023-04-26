@@ -11,6 +11,10 @@
 		$wrapper = $('#page-wrapper'),
 		$banner = $('#banner'),
 		$header = $('#header');
+		$quote = $('#quote');
+		$said_by = $('#said_by');
+		$history = $('#history');
+		$getquote = $('#getquote');
 
 	// Breakpoints.
 		breakpoints({
@@ -26,6 +30,20 @@
 			window.setTimeout(function() {
 				$body.removeClass('is-preload');
 			}, 100);
+
+			$.getJSON("./assets/quotes.json", function (data) {
+				$quote.text(data['quotes'][Math.floor(Math.random() * 100)]['quote']);
+				$said_by.text(data['quotes'][Math.floor(Math.random() * 100)]['said_by']);
+				$history.text(data['quotes'][Math.floor(Math.random() * 100)]['history']);
+			})
+		});
+
+		$getquote.on('click', function(){
+			$.getJSON("./assets/quotes.json", function (data) {
+				$quote.text(data['quotes'][Math.floor(Math.random() * 100)]['quote']);
+				$said_by.text(data['quotes'][Math.floor(Math.random() * 100)]['said_by']);
+				$history.text(data['quotes'][Math.floor(Math.random() * 100)]['history']);
+			})
 		});
 
 	// Mobile?
