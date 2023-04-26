@@ -15,6 +15,15 @@
 		$said_by = $('#said_by');
 		$history = $('#history');
 		$getquote = $('#getquote');
+		$tour_dest_1 = $('#tour_dest_1');
+		$tour_img_1 = $('#tour_img_1');
+		$tour_descr_1 = $('#tour_descr_1');
+		$tour_dest_2 = $('#tour_dest_2');
+		$tour_img_2 = $('#tour_img_2');
+		$tour_descr_2 = $('#tour_descr_2');
+		$tour_dest_3 = $('#tour_dest_3');
+		$tour_img_3 = $('#tour_img_3');
+		$tour_descr_3 = $('#tour_descr_3');
 
 	// Breakpoints.
 		breakpoints({
@@ -32,10 +41,42 @@
 			}, 100);
 
 			$.getJSON("./assets/quotes.json", function (data) {
-				$quote.text(data['quotes'][Math.floor(Math.random() * 100)]['quote']);
-				$said_by.text(data['quotes'][Math.floor(Math.random() * 100)]['said_by']);
-				$history.text(data['quotes'][Math.floor(Math.random() * 100)]['history']);
+
+				var random = Math.floor(Math.random() * 100);
+				$quote.text(data['quotes'][random]['quote']);
+				$said_by.text(data['quotes'][random]['said_by']);
+				$history.text(data['quotes'][random]['history']);
 			})
+
+			$.getJSON("./assets/destinations.json", function (data) {
+				var random_1 = Math.floor(Math.random() * 15);
+				var destination = data['destinations'][random_1]['name'];
+				$tour_dest_1.text(destination);
+				$tour_img_1.attr("src","images/"+destination+".jpg");
+				$tour_descr_1.text(data['destinations'][random_1]['history']);
+			
+				var random_2 = Math.floor(Math.random() * 15);
+				while(random_1==random_2){
+					random_2 = Math.floor(Math.random() * 15);
+				}
+
+				destination = data['destinations'][random_2]['name'];
+				$tour_dest_2.text(destination);
+				$tour_img_2.attr("src","images/"+destination+".jpg");
+				$tour_descr_2.text(data['destinations'][random_2]['history']);
+				
+				var random_3 = Math.floor(Math.random() * 15);
+				while (random_3 == random_1 || random_3 == random_2){
+					random_3 = Math.floor(Math.random() * 15);
+				}
+
+				destination = data['destinations'][random_3]['name'];
+				$tour_dest_3.text(destination);
+				$tour_img_3.attr("src","images/"+destination+".jpg");
+				$tour_descr_3.text(data['destinations'][random_3]['history']);
+			
+			})
+
 		});
 
 		$getquote.on('click', function(){
