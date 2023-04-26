@@ -81,9 +81,10 @@
 
 		$getquote.on('click', function(){
 			$.getJSON("./assets/quotes.json", function (data) {
-				$quote.text(data['quotes'][Math.floor(Math.random() * 100)]['quote']);
-				$said_by.text(data['quotes'][Math.floor(Math.random() * 100)]['said_by']);
-				$history.text(data['quotes'][Math.floor(Math.random() * 100)]['history']);
+				var random = Math.floor(Math.random() * 100);
+				$quote.text(data['quotes'][random]['quote']);
+				$said_by.text(data['quotes'][random]['said_by']);
+				$history.text(data['quotes'][random]['history']);
 			})
 		});
 
